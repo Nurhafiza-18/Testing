@@ -1,31 +1,153 @@
 {
-  "notaPoket": {
-    "tajuk": "Nota Poket SejaKOM",
-    "gambar": "1.jpg"
+  "siteInfo": {
+    "title": "SejaKOM Digital (Full Komik)",
+    "language": "ms",
+    "theme": {
+      "primaryColor": "#005b96",
+      "secondaryColor": "#ffc107",
+      "accentColor": "#03396c"
+    }
   },
-  "abubakar": {
-    "tajuk": "Abu Bakar As-Siddiq",
-    "gambar": "abubakar.jpg",
-    "trivia": "Tokoh pertama bergelar Khalifah selepas Rasulullah SAW wafat."
+  "startScreen": {
+    "title": "Selamat Datang ke SejaKOM Digital",
+    "description": "Jelajahi sejarah tokoh-tokoh Islam terkenal melalui siri komik interaktif yang menarik! Nikmati cerita-cerita menarik yang dikemas dalam bentuk visual yang menakjubkan.",
+    "buttonText": "Mula Membaca"
   },
-  "umar": {
-    "tajuk": "Umar Al-Khattab",
-    "gambar": "umarkhattab.jpg",
-    "trivia": "Mengembangkan empayar Islam terbesar pada zamannya."
+  "navigation": {
+    "menu": [
+      {
+        "id": "nota",
+        "name": "Nota Poket",
+        "link": "#nota"
+      },
+      {
+        "id": "abubakar",
+        "name": "Abu Bakar",
+        "link": "#abubakar"
+      },
+      {
+        "id": "umaraziz",
+        "name": "Umar Abdul Aziz",
+        "link": "#umaraziz"
+      },
+      {
+        "id": "fateh",
+        "name": "Muhammad Al-Fateh",
+        "link": "#fateh"
+      },
+      {
+        "id": "salahuddin",
+        "name": "Salahuddin Al-Ayyubi",
+        "link": "#salahuddin"
+      }
+    ]
   },
-  "umaraziz": {
-    "tajuk": "Umar Abdul Aziz",
-    "gambar": "umaraziz.jpg",
-    "trivia": "Dikenali sebagai Khalifah kelima yang adil dan zuhud."
-  },
-  "fateh": {
-    "tajuk": "Muhammad Al-Fateh",
-    "gambar": "fateh.jpg",
-    "trivia": "Menakluk Constantinople ketika berusia 21 tahun."
-  },
-  "salahuddin": {
-    "tajuk": "Salahuddin Al-Ayyubi",
-    "gambar": "salahuddin.jpg",
-    "trivia": "Membebaskan Baitulmaqdis daripada tentera Salib."
+  "sections": [
+    {
+      "id": "nota",
+      "title": "Nota Poket SejaKOM",
+      "description": "Nota ringkas tentang tokoh-tokoh Islam sepanjang zaman",
+      "type": "single",
+      "content": {
+        "image": "1.jpg",
+        "alt": "Nota Poket"
+      }
+    },
+    {
+      "id": "abubakar",
+      "title": "Abu Bakar As-Siddiq",
+      "description": "Khalifah pertama dalam sejarah Islam",
+      "type": "multi-page",
+      "totalPages": 3,
+      "pages": [
+        {
+          "pageNum": 1,
+          "image": "8.jpg",
+          "alt": "Komik Abu Bakar 1"
+        },
+        {
+          "pageNum": 2,
+          "image": "9.jpg",
+          "alt": "Komik Abu Bakar 2"
+        },
+        {
+          "pageNum": 3,
+          "image": "10.jpg",
+          "alt": "Komik Abu Bakar 3"
+        }
+      ],
+      "navigation": {
+        "prevText": "Sebelumnya",
+        "nextText": "Seterusnya"
+      }
+    },
+    {
+      "id": "umaraziz",
+      "title": "Umar Abdul Aziz",
+      "description": "Khalifah yang terkenal dengan keadilan dan kebijaksanaan",
+      "type": "multi-page",
+      "totalPages": 1,
+      "pages": [
+        {
+          "pageNum": 1,
+          "image": "2.jpg", 
+          "alt": "Komik Umar"
+        }
+      ],
+      "navigation": {
+        "prevText": "Sebelumnya",
+        "nextText": "Seterusnya"
+      }
+    },
+    {
+      "id": "fateh",
+      "title": "Muhammad Al-Fateh",
+      "description": "Penakluk Constantinople",
+      "type": "multi-page",
+      "totalPages": 0,
+      "pages": [],
+      "navigation": {
+        "prevText": "Sebelumnya",
+        "nextText": "Seterusnya"
+      }
+    },
+    {
+      "id": "salahuddin",
+      "title": "Salahuddin Al-Ayyubi",
+      "description": "Pahlawan Islam yang membebaskan Jerusalem",
+      "type": "multi-page",
+      "totalPages": 0,
+      "pages": [],
+      "navigation": {
+        "prevText": "Sebelumnya",
+        "nextText": "Seterusnya"
+      }
+    }
+  ],
+  "ui": {
+    "loading": {
+      "enabled": true,
+      "spinnerClass": "loading-spinner"
+    },
+    "progressBar": {
+      "enabled": true,
+      "id": "progressBar"
+    },
+    "readingMode": {
+      "enabled": true,
+      "buttonText": "Mode Membaca"
+    },
+    "floatingButton": {
+      "enabled": true,
+      "text": "⬆️",
+      "action": "scrollToTop"
+    },
+    "backToMenu": {
+      "text": "Kembali ke Menu",
+      "icon": "⬆️"
+    },
+    "lightbox": {
+      "enabled": true
+    }
   }
 }
