@@ -3,96 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SejaKOM Digital</title>
+  <title>SejaKOM Digital PRO</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f9f9f9;
-    }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f9f9f9; }
     #start-screen {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #0077cc;
-      color: white;
-      text-align: center;
+      height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #0077cc; color: white; text-align: center;
     }
     #start-screen button {
-      margin-top: 2rem;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      background: #ffd700;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
+      margin-top: 2rem; padding: 1rem 2rem; font-size: 1.2rem;
+      background: #ffd700; border: none; border-radius: 30px;
+      cursor: pointer; font-weight: bold; transition: background 0.3s;
     }
-    #start-screen button:hover {
-      background: #ffbb00;
-    }
+    #start-screen button:hover { background: #ffbb00; }
     header {
-      background: #0077cc;
-      color: white;
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      z-index: 1000;
+      background: #0077cc; color: white; padding: 1rem; position: sticky;
+      top: 0; display: flex; justify-content: center; gap: 1rem; z-index: 1000;
       display: none;
     }
-    header a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    header a:hover {
-      color: #ffd700;
-    }
+    header a { color: white; text-decoration: none; font-weight: bold; transition: 0.3s; }
+    header a:hover { color: #ffd700; }
     .section {
-      max-width: 900px;
-      margin: auto;
-      background: white;
+      max-width: 900px; margin: auto; background: white;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-top: 2rem;
-      border-radius: 10px;
-      overflow: hidden;
-      padding: 1rem;
-      display: none;
+      margin-top: 2rem; border-radius: 10px;
+      overflow: hidden; padding: 1rem; display: none;
+      animation: fadeIn 1s ease forwards; opacity: 0;
     }
     .section img {
-      width: 100%;
-      border-radius: 10px;
-      margin-top: 1rem;
+      width: 100%; border-radius: 10px; margin-top: 1rem;
+      cursor: pointer;
     }
     .back-to-menu {
-      display: block;
-      margin: 1rem auto 0;
-      padding: 0.5rem 1rem;
-      background: #0077cc;
-      color: white;
-      text-align: center;
-      width: fit-content;
-      border-radius: 30px;
-      text-decoration: none;
+      display: block; margin: 1rem auto 0; padding: 0.5rem 1rem;
+      background: #0077cc; color: white; text-align: center;
+      width: fit-content; border-radius: 30px; text-decoration: none;
       font-size: 0.9rem;
     }
-    .back-to-menu:hover {
-      background: #005fa3;
+    .back-to-menu:hover { background: #005fa3; }
+    h2 { text-align: center; color: #333; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    h2 {
-      text-align: center;
-      color: #333;
-    }
+
+    /* Warna tema berbeza untuk setiap bahagian */
+    #nota { background: #e3f2fd; }
+    #abubakar { background: #e8f5e9; }
+    #umar { background: #f1f8e9; }
+    #fateh { background: #fff3e0; }
+    #salahuddin { background: #e1f5fe; }
   </style>
 </head>
 <body>
@@ -102,56 +66,61 @@
   </div>
 
   <header id="main-menu">
-    <a href="#nota">Nota Poket</a>
-    <a href="#abubakar">Abu Bakar</a>
-    <a href="#umar">Umar Abdul Aziz</a>
-    <a href="#fateh">Muhammad Al-Fateh</a>
-    <a href="#salahuddin">Salahuddin Al-Ayyubi</a>
+    <a href="#nota" onclick="playClickSound()">Nota Poket</a>
+    <a href="#abubakar" onclick="playClickSound()">Abu Bakar</a>
+    <a href="#umar" onclick="playClickSound()">Umar Abdul Aziz</a>
+    <a href="#fateh" onclick="playClickSound()">Muhammad Al-Fateh</a>
+    <a href="#salahuddin" onclick="playClickSound()">Salahuddin Al-Ayyubi</a>
   </header>
 
   <section id="nota" class="section">
     <h2>Nota Poket</h2>
-    <img src="1.jpg" alt="Nota Poket">
+    <a href="1.jpg" data-lightbox="nota"><img src="1.jpg" alt="Nota Poket"></a>
     <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
   </section>
 
   <section id="abubakar" class="section">
     <h2>Abu Bakar As-Siddiq</h2>
-    <img src="8.jpg" alt="Abu Bakar 1">
-    <img src="9.jpg" alt="Abu Bakar 2">
-    <img src="10.jpg" alt="Abu Bakar 3">
+    <a href="8.jpg" data-lightbox="abubakar"><img src="8.jpg" alt="Abu Bakar 1"></a>
+    <a href="9.jpg" data-lightbox="abubakar"><img src="9.jpg" alt="Abu Bakar 2"></a>
+    <a href="10.jpg" data-lightbox="abubakar"><img src="10.jpg" alt="Abu Bakar 3"></a>
     <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
   </section>
 
   <section id="umar" class="section">
     <h2>Umar Abdul Aziz</h2>
-    <img src="2.jpg" alt="Umar 1">
-    <img src="3.jpg" alt="Umar 2">
+    <a href="2.jpg" data-lightbox="umar"><img src="2.jpg" alt="Umar 1"></a>
+    <a href="3.jpg" data-lightbox="umar"><img src="3.jpg" alt="Umar 2"></a>
     <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
   </section>
 
   <section id="fateh" class="section">
     <h2>Muhammad Al-Fateh</h2>
-    <img src="4.jpg" alt="Fateh 1">
-    <img src="5.jpg" alt="Fateh 2">
+    <a href="4.jpg" data-lightbox="fateh"><img src="4.jpg" alt="Fateh 1"></a>
+    <a href="5.jpg" data-lightbox="fateh"><img src="5.jpg" alt="Fateh 2"></a>
     <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
   </section>
 
   <section id="salahuddin" class="section">
     <h2>Salahuddin Al-Ayyubi</h2>
-    <img src="6.jpg" alt="Salahuddin 1">
-    <img src="7.jpg" alt="Salahuddin 2">
+    <a href="6.jpg" data-lightbox="salahuddin"><img src="6.jpg" alt="Salahuddin 1"></a>
+    <a href="7.jpg" data-lightbox="salahuddin"><img src="7.jpg" alt="Salahuddin 2"></a>
     <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
   </section>
 
+  <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
   <script>
     function startReading() {
       document.getElementById('start-screen').style.display = 'none';
       document.getElementById('main-menu').style.display = 'flex';
       const sections = document.querySelectorAll('.section');
-      sections.forEach(section => {
-        section.style.display = 'block';
-      });
+      sections.forEach(section => { section.style.display = 'block'; });
+    }
+
+    function playClickSound() {
+      document.getElementById('clickSound').play();
     }
 
     const backToMenuLinks = document.querySelectorAll('.back-to-menu');
@@ -159,8 +128,10 @@
       link.addEventListener('click', (e) => {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        playClickSound();
       });
     });
   </script>
 </body>
 </html>
+
