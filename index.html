@@ -1,177 +1,72 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SejaKOM: Komik Digital Interaktif</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SejaKOM Flipbook</title>
+  <link rel="stylesheet" href="https://unpkg.com/stpageflip@latest/dist/pageflip.css">
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
     body {
-      font-family: sans-serif;
       margin: 0;
-      background-color: #f9f9f9;
-      padding-bottom: 3rem;
+      background-color: #f4f4f4;
+      font-family: sans-serif;
     }
-    header {
-      background: #0066cc;
-      padding: 1rem;
-      text-align: center;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 999;
+    #flipbook {
+      width: 100%;
+      height: 100vh;
     }
-    nav {
-      margin-top: 1rem;
-      text-align: center;
+    .page {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      background-color: white;
+      overflow: hidden;
+      flex-direction: column;
     }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #0066cc;
-      font-weight: bold;
-    }
-    .comic-container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 2rem;
-    }
-    .panel {
-      text-align: center;
-      margin-bottom: 2rem;
-      padding: 1rem;
-      border-radius: 15px;
-      background-color: #f0f8ff;
-    }
-    .panel h2 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: #333;
-      cursor: pointer;
-    }
-    .panel img {
+    .page img {
       max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease-in-out;
-      cursor: zoom-in;
-      opacity: 1;
-    }
-    .panel img.zoomed {
-      transform: scale(1.5);
-      cursor: zoom-out;
-      z-index: 99;
-    }
-    .info, .nilai {
-      margin: 0.5rem 0;
-      font-size: 0.9rem;
-      color: #555;
-    }
-    .info::before {
-      content: "\1F4A1 ";
-    }
-    .nilai::before {
-      content: "\2764\FE0F ";
-    }
-    .end-btn {
-      display: block;
-      margin: 2rem auto;
-      padding: 0.8rem 2rem;
-      background: #0066cc;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
+      max-height: 100%;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>SejaKOM: Nota Poket Tokoh</h1>
-    <nav>
-      <a href="#panel1">Mula</a>
-      <a href="#panel2">Umar Abdul Aziz</a>
-      <a href="#panel4">Muhammad al-Fateh</a>
-      <a href="#panel6">Salahuddin al-Ayyubi</a>
-      <a href="#panel8">Abu Bakar as-Siddiq</a>
-    </nav>
-  </header>
+  <div id="flipbook" class="page-flip-book"></div>
 
-  <div class="comic-container">
-
-    <div class="panel" id="panel1">
-      <h2>Nota Poket Tokoh</h2>
-      <img src="1.jpg" onclick="toggleZoom(this)">
-    </div>
-
-    <div class="panel" id="panel2">
-      <h2 onclick="toggleInfo('info2')">Umar Abdul Aziz</h2>
-      <img src="2.jpg" onclick="toggleZoom(this)">
-      <div class="info" id="info2">Umar Abdul Aziz dikenali sebagai Khalifah yang adil dan zuhud.</div>
-      <div class="nilai">Keadilan</div>
-    </div>
-
-    <div class="panel">
-      <img src="3.jpg" onclick="toggleZoom(this)">
-    </div>
-
-    <div class="panel" id="panel4">
-      <h2 onclick="toggleInfo('info4')">Muhammad al-Fateh</h2>
-      <img src="4.jpg" onclick="toggleZoom(this)">
-      <div class="info" id="info4">Muhammad al-Fateh membuka Constantinople pada usia 21 tahun.</div>
-      <div class="nilai">Keberanian</div>
-    </div>
-
-    <div class="panel">
-      <img src="5.jpg" onclick="toggleZoom(this)">
-    </div>
-
-    <div class="panel" id="panel6">
-      <h2 onclick="toggleInfo('info6')">Salahuddin al-Ayyubi</h2>
-      <img src="6.jpg" onclick="toggleZoom(this)">
-      <div class="info" id="info6">Salahuddin membebaskan Baitulmaqdis dengan penuh rahmah.</div>
-      <div class="nilai">Kasih Sayang</div>
-    </div>
-
-    <div class="panel">
-      <img src="7.jpg" onclick="toggleZoom(this)">
-    </div>
-
-    <div class="panel" id="panel8">
-      <h2 onclick="toggleInfo('info8')">Abu Bakar as-Siddiq</h2>
-      <img src="8.jpg" onclick="toggleZoom(this)">
-      <div class="info" id="info8">Abu Bakar ialah sahabat terdekat Nabi SAW dan khalifah pertama Islam.</div>
-      <div class="nilai">Kejujuran</div>
-    </div>
-
-    <div class="panel">
-      <img src="9.jpg" onclick="toggleZoom(this)">
-    </div>
-
-    <div class="panel">
-      <img src="10.jpg" onclick="toggleZoom(this)">
-    </div>
-
-    <button class="end-btn" onclick="scrollToTop()">Tamat - Kembali ke Mula</button>
-
-  </div>
-
+  <script src="https://unpkg.com/stpageflip@latest/dist/pageflip.browser.min.js"></script>
   <script>
-    function toggleZoom(img) {
-      img.classList.toggle("zoomed");
-    }
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    function toggleInfo(id) {
-      const element = document.getElementById(id);
-      if (element) {
-        element.style.display = (element.style.display === 'none' || element.style.display === '') ? 'block' : 'none';
+    const images = [
+      "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg",
+      "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"
+    ];
+
+    const app = new St.PageFlip(
+      document.getElementById("flipbook"),
+      {
+        width: 600,
+        height: 800,
+        size: "stretch",
+        minWidth: 315,
+        maxWidth: 1000,
+        minHeight: 400,
+        maxHeight: 1536,
+        showCover: true,
+        mobileScrollSupport: false
       }
-    }
+    );
+
+    const pages = images.map((img) => {
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("page");
+      const image = document.createElement("img");
+      image.src = img;
+      wrapper.appendChild(image);
+      return wrapper;
+    });
+
+    app.loadFromHTML(pages);
   </script>
 </body>
 </html>
