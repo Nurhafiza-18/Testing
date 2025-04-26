@@ -1,0 +1,31 @@
+{
+  "notaPoket": {
+    "tajuk": "Nota Poket SejaKOM",
+    "gambar": "1.jpg"
+  },
+  "abubakar": {
+    "tajuk": "Abu Bakar As-Siddiq",
+    "gambar": "abubakar.jpg",
+    "trivia": "Tokoh pertama bergelar Khalifah selepas Rasulullah SAW wafat."
+  },
+  "umar": {
+    "tajuk": "Umar Al-Khattab",
+    "gambar": "umarkhattab.jpg",
+    "trivia": "Mengembangkan empayar Islam terbesar pada zamannya."
+  },
+  "umaraziz": {
+    "tajuk": "Umar Abdul Aziz",
+    "gambar": "umaraziz.jpg",
+    "trivia": "Dikenali sebagai Khalifah kelima yang adil dan zuhud."
+  },
+  "fateh": {
+    "tajuk": "Muhammad Al-Fateh",
+    "gambar": "fateh.jpg",
+    "trivia": "Menakluk Constantinople ketika berusia 21 tahun."
+  },
+  "salahuddin": {
+    "tajuk": "Salahuddin Al-Ayyubi",
+    "gambar": "salahuddin.jpg",
+    "trivia": "Membebaskan Baitulmaqdis daripada tentera Salib."
+  }
+}
