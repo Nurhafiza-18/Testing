@@ -3,18 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SejaKOM Flipbook Manual</title>
-  <link rel="stylesheet" href="pageflip.css">
+  <title>SejaKOM Digital</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+    }
+    header {
+      background: #0077cc;
+      color: white;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      z-index: 1000;
+    }
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    header a:hover {
+      color: #ffd700;
+    }
+    .section {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-top: 2rem;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 1rem;
+    }
+    .section img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .back-to-menu {
+      display: block;
+      margin: 1rem auto 0;
+      padding: 0.5rem 1rem;
+      background: #0077cc;
+      color: white;
+      text-align: center;
+      width: fit-content;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-to-menu:hover {
+      background: #005fa3;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <div id="flipbook"></div>
-  <script src="pageflip.js"></script>
+  <header>
+    <a href="#nota">Nota Poket</a>
+    <a href="#abubakar">Abu Bakar</a>
+    <a href="#umar">Umar Abdul Aziz</a>
+    <a href="#fateh">Muhammad Al-Fateh</a>
+    <a href="#salahuddin">Salahuddin Al-Ayyubi</a>
+  </header>
+
+  <section id="nota" class="section">
+    <h2>Nota Poket</h2>
+    <img src="1.jpg" alt="Nota Poket">
+    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+  </section>
+
+  <section id="abubakar" class="section">
+    <h2>Abu Bakar As-Siddiq</h2>
+    <img src="8.jpg" alt="Abu Bakar 1">
+    <img src="9.jpg" alt="Abu Bakar 2">
+    <img src="10.jpg" alt="Abu Bakar 3">
+    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+  </section>
+
+  <section id="umar" class="section">
+    <h2>Umar Abdul Aziz</h2>
+    <img src="2.jpg" alt="Umar 1">
+    <img src="3.jpg" alt="Umar 2">
+    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+  </section>
+
+  <section id="fateh" class="section">
+    <h2>Muhammad Al-Fateh</h2>
+    <img src="4.jpg" alt="Fateh 1">
+    <img src="5.jpg" alt="Fateh 2">
+    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+  </section>
+
+  <section id="salahuddin" class="section">
+    <h2>Salahuddin Al-Ayyubi</h2>
+    <img src="6.jpg" alt="Salahuddin 1">
+    <img src="7.jpg" alt="Salahuddin 2">
+    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+  </section>
+
   <script>
-    const images = [
-      "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg",
-      "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"
-    ];
-    const flipbook = new FlipBook('flipbook', images);
+    const backToMenuLinks = document.querySelectorAll('.back-to-menu');
+    backToMenuLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
   </script>
 </body>
 </html>
