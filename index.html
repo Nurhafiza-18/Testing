@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SejaKOM: Testing</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+    }
+    .comic-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+    img {
+      max-width: 90%;
+      height: auto;
+      transition: transform 0.3s;
+      cursor: zoom-in;
+      margin-bottom: 20px;
+    }
+    img.zoomed {
+      transform: scale(2);
+      cursor: zoom-out;
+    }
+    .info-btn {
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      background: #ffd700;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .info-box {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      border-radius: 10px;
+      max-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <button class="info-btn" onclick="toggleInfo()">💡</button>
+  <div class="info-box" id="infoBox">
+    <strong>Tahukah anda?</strong><br/>
+    Terdapat 4 Khalifah Khulafa’ al-Rasyidin yang menjadi contoh kepimpinan Islam sejati.
+  </div>
+
+  <div class="comic-page">
+    <img src="1.jpg" onclick="toggleZoom(this)" />
+    <img src="2.jpg" onclick="toggleZoom(this)" />
+    <img src="3.jpg" onclick="toggleZoom(this)" />
+    <img src="4.jpg" onclick="toggleZoom(this)" />
+    <img src="5.jpg" onclick="toggleZoom(this)" />
+    <img src="6.jpg" onclick="toggleZoom(this)" />
+    <img src="7.jpg" onclick="toggleZoom(this)" />
+    <img src="8.jpg" onclick="toggleZoom(this)" />
+    <img src="9.jpg" onclick="toggleZoom(this)" />
+    <img src="10.jpg" onclick="toggleZoom(this)" />
+  </div>
+
+  <script>
+    function toggleZoom(img) {
+      img.classList.toggle("zoomed");
+    }
+
+    function toggleInfo() {
+      const box = document.getElementById("infoBox");
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+  </script>
+</body>
+</html>
