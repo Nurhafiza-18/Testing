@@ -5,53 +5,306 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SejaKOM Digital (Full Komik)</title>
   <style>
-    html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f9f9f9; }
+    :root {
+      --primary-color: #005b96;
+      --secondary-color: #ffc107;
+      --accent-color: #03396c;
+      --text-light: #ffffff;
+      --text-dark: #333333;
+      --bg-light: #f9f9f9;
+      --bg-card: #ffffff;
+      --shadow: 0 4px 15px rgba(0,0,0,0.15);
+      --transition: all 0.3s ease;
+    }
+    
+    html { 
+      scroll-behavior: smooth; 
+    }
+    
+    body { 
+      margin: 0; 
+      font-family: 'Segoe UI', 'Roboto', sans-serif; 
+      background: var(--bg-light); 
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    
+    /* Start Screen */
     #start-screen {
-      height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      background: #0077cc; color: white; text-align: center;
+      height: 100vh; 
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); 
+      color: var(--text-light); 
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
     }
+    
+    #start-screen::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('/api/placeholder/900/600');
+      background-size: cover;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    
+    #start-screen > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    #start-screen h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    #start-screen p {
+      max-width: 600px;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    
     #start-screen button {
-      margin-top: 2rem; padding: 1rem 2rem; font-size: 1.2rem;
-      background: #ffd700; border: none; border-radius: 30px;
-      cursor: pointer; font-weight: bold; transition: background 0.3s;
+      padding: 1rem 2.5rem; 
+      font-size: 1.2rem;
+      background: var(--secondary-color); 
+      border: none; 
+      border-radius: 50px;
+      cursor: pointer; 
+      font-weight: bold; 
+      transition: var(--transition);
+      color: var(--text-dark);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-    #start-screen button:hover { background: #ffbb00; }
+    
+    #start-screen button:hover { 
+      background: #ffcc33;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    
+    /* Header Navigation */
     header {
-      background: #0077cc; color: white; padding: 1rem; position: sticky;
-      top: 0; display: flex; justify-content: center; gap: 1rem; z-index: 1000;
+      background: var(--primary-color);
+      color: var(--text-light);
+      padding: 0.8rem; 
+      position: sticky;
+      top: 0; 
       display: none;
+      justify-content: center; 
+      flex-wrap: wrap;
+      gap: 1rem; 
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    header a { color: white; text-decoration: none; font-weight: bold; transition: 0.3s; }
-    header a:hover { color: #ffd700; }
+    
+    header a { 
+      color: var(--text-light); 
+      text-decoration: none; 
+      font-weight: bold; 
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+    }
+    
+    header a:hover { 
+      background-color: rgba(255,255,255,0.2); 
+      color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    header a.active {
+      background-color: var(--secondary-color);
+      color: var(--text-dark);
+    }
+    
+    /* Comic Sections */
     .section {
-      max-width: 900px; margin: auto; background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-top: 2rem; border-radius: 10px;
-      overflow: hidden; padding: 1rem; display: none;
-      animation: fadeIn 1s ease forwards; opacity: 0;
+      max-width: 900px; 
+      margin: 2rem auto; 
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      border-radius: 15px;
+      overflow: hidden; 
+      padding: 2rem 1rem; 
+      display: none;
+      animation: fadeIn 1s ease forwards; 
+      opacity: 0;
     }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .section-header h2 {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-header p {
+      color: #666;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    
+    .comic-container {
+      position: relative;
+    }
+    
+    .comic-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 1rem 0;
+    }
+    
+    .nav-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+    
+    .nav-btn:hover {
+      background: var(--accent-color);
+    }
+    
+    .nav-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+    
+    .page-dot {
+      width: 10px;
+      height: 10px;
+      background: #ccc;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .page-dot.active {
+      background: var(--primary-color);
+      transform: scale(1.3);
+    }
+    
     .section img {
-      width: 80%;
-      max-width: 700px;
+      width: 90%;
+      max-width: 800px;
       height: auto;
       display: block;
       margin: 1rem auto;
       border-radius: 10px;
-      object-fit: contain;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: var(--transition);
     }
+    
+    .section img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
     .back-to-menu {
-      display: block; margin: 2rem auto 0; padding: 0.5rem 1rem;
-      background: #0077cc; color: white; text-align: center;
-      width: fit-content; border-radius: 30px; text-decoration: none;
-      font-size: 0.9rem;
+      display: block; 
+      margin: 2rem auto 0; 
+      padding: 0.8rem 1.5rem;
+      background: var(--primary-color); 
+      color: white; 
+      text-align: center;
+      width: fit-content; 
+      border-radius: 30px; 
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-    .back-to-menu:hover { background: #005fa3; }
-    h2 { text-align: center; color: #333; }
+    
+    .back-to-menu:hover { 
+      background: var(--accent-color); 
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    
+    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Comic page navigation */
+    .comic-pages {
+      position: relative;
+    }
+    
+    .comic-page {
+      display: none;
+    }
+    
+    .comic-page.active {
+      display: block;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--primary-color);
+      color: var(--text-light);
+      margin-top: 3rem;
+      display: none;
+    }
+    
+    footer p {
+      margin: 0.5rem 0;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      #start-screen h1 {
+        font-size: 2rem;
+      }
+      
+      header {
+        padding: 0.5rem;
+      }
+      
+      header a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+      }
+      
+      .section {
+        padding: 1rem;
+        margin: 1rem;
+      }
+      
+      .section-header h2 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -59,72 +312,326 @@
 
   <div id="start-screen">
     <h1>Selamat Datang ke SejaKOM Digital</h1>
+    <p>Jelajahi sejarah tokoh-tokoh Islam terkenal melalui siri komik interaktif yang menarik!</p>
     <button onclick="startReading()">Mula Membaca</button>
   </div>
 
   <header id="main-menu">
-    <a href="#nota" onclick="playClickSound()">Nota Poket</a>
-    <a href="#abubakar" onclick="playClickSound()">Abu Bakar</a>
-    <a href="#umaraziz" onclick="playClickSound()">Umar Abdul Aziz</a>
-    <a href="#fateh" onclick="playClickSound()">Muhammad Al-Fateh</a>
-    <a href="#salahuddin" onclick="playClickSound()">Salahuddin Al-Ayyubi</a>
+    <a href="#nota" class="nav-link" data-section="nota" onclick="navigateSection(this)">Nota Poket</a>
+    <a href="#abubakar" class="nav-link" data-section="abubakar" onclick="navigateSection(this)">Abu Bakar</a>
+    <a href="#umaraziz" class="nav-link" data-section="umaraziz" onclick="navigateSection(this)">Umar Abdul Aziz</a>
+    <a href="#fateh" class="nav-link" data-section="fateh" onclick="navigateSection(this)">Muhammad Al-Fateh</a>
+    <a href="#salahuddin" class="nav-link" data-section="salahuddin" onclick="navigateSection(this)">Salahuddin Al-Ayyubi</a>
   </header>
 
   <section id="nota" class="section">
-    <h2>Nota Poket SejaKOM</h2>
-    <img src="1.jpg" alt="Nota Poket">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+    <div class="section-header">
+      <h2>Nota Poket SejaKOM</h2>
+      <p>Nota ringkas tentang tokoh-tokoh Islam sepanjang zaman</p>
+    </div>
+    <div class="comic-container">
+      <img src="1.jpg" alt="Nota Poket">
+    </div>
+    <a href="#" class="back-to-menu" onclick="scrollToTop()">⬆️ Kembali ke Menu</a>
   </section>
 
   <section id="abubakar" class="section">
-    <h2>Abu Bakar As-Siddiq</h2>
-    <img src="8.jpg" alt="Komik Abu Bakar 1">
-    <img src="9.jpg" alt="Komik Abu Bakar 2">
-    <img src="10.jpg" alt="Komik Abu Bakar 3">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+    <div class="section-header">
+      <h2>Abu Bakar As-Siddiq</h2>
+      <p>Khalifah pertama dalam sejarah Islam</p>
+    </div>
+    <div class="comic-container">
+      <div class="comic-pages">
+        <div class="comic-page active" data-page="1">
+          <img src="8.jpg" alt="Komik Abu Bakar 1">
+        </div>
+        <div class="comic-page" data-page="2">
+          <img src="9.jpg" alt="Komik Abu Bakar 2">
+        </div>
+        <div class="comic-page" data-page="3">
+          <img src="10.jpg" alt="Komik Abu Bakar 3">
+        </div>
+      </div>
+      <div class="comic-nav">
+        <button class="nav-btn prev-btn" onclick="changePage('abubakar', -1)" disabled>« Sebelumnya</button>
+        <div class="pagination" id="abubakar-pagination">
+          <span class="page-indicator">Halaman <span class="current-page">1</span> dari <span class="total-pages">3</span></span>
+        </div>
+        <button class="nav-btn next-btn" onclick="changePage('abubakar', 1)">Seterusnya »</button>
+      </div>
+      <div class="pagination-dots" id="abubakar-dots">
+        <span class="page-dot active" onclick="goToPage('abubakar', 1)"></span>
+        <span class="page-dot" onclick="goToPage('abubakar', 2)"></span>
+        <span class="page-dot" onclick="goToPage('abubakar', 3)"></span>
+      </div>
+    </div>
+    <a href="#" class="back-to-menu" onclick="scrollToTop()">⬆️ Kembali ke Menu</a>
   </section>
 
   <section id="umaraziz" class="section">
-    <h2>Umar Abdul Aziz</h2>
-    <img src="2.jpg" alt="Komik Umar 1">
-    <img src="3.jpg" alt="Komik Umar 2">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+    <div class="section-header">
+      <h2>Umar Abdul Aziz</h2>
+      <p>Khalifah yang terkenal dengan keadilan dan kebijaksanaan</p>
+    </div>
+    <div class="comic-container">
+      <div class="comic-pages">
+        <div class="comic-page active" data-page="1">
+          <img src="2.jpg" alt="Komik Umar 1">
+        </div>
+        <div class="comic-page" data-page="2">
+          <img src="3.jpg" alt="Komik Umar 2">
+        </div>
+      </div>
+      <div class="comic-nav">
+        <button class="nav-btn prev-btn" onclick="changePage('umaraziz', -1)" disabled>« Sebelumnya</button>
+        <div class="pagination" id="umaraziz-pagination">
+          <span class="page-indicator">Halaman <span class="current-page">1</span> dari <span class="total-pages">2</span></span>
+        </div>
+        <button class="nav-btn next-btn" onclick="changePage('umaraziz', 1)">Seterusnya »</button>
+      </div>
+      <div class="pagination-dots" id="umaraziz-dots">
+        <span class="page-dot active" onclick="goToPage('umaraziz', 1)"></span>
+        <span class="page-dot" onclick="goToPage('umaraziz', 2)"></span>
+      </div>
+    </div>
+    <a href="#" class="back-to-menu" onclick="scrollToTop()">⬆️ Kembali ke Menu</a>
   </section>
 
   <section id="fateh" class="section">
-    <h2>Muhammad Al-Fateh</h2>
-    <img src="4.jpg" alt="Komik Fateh 1">
-    <img src="5.jpg" alt="Komik Fateh 2">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+    <div class="section-header">
+      <h2>Muhammad Al-Fateh</h2>
+      <p>Penakluk Konstantinopel yang terkenal</p>
+    </div>
+    <div class="comic-container">
+      <div class="comic-pages">
+        <div class="comic-page active" data-page="1">
+          <img src="4.jpg" alt="Komik Fateh 1">
+        </div>
+        <div class="comic-page" data-page="2">
+          <img src="5.jpg" alt="Komik Fateh 2">
+        </div>
+      </div>
+      <div class="comic-nav">
+        <button class="nav-btn prev-btn" onclick="changePage('fateh', -1)" disabled>« Sebelumnya</button>
+        <div class="pagination" id="fateh-pagination">
+          <span class="page-indicator">Halaman <span class="current-page">1</span> dari <span class="total-pages">2</span></span>
+        </div>
+        <button class="nav-btn next-btn" onclick="changePage('fateh', 1)">Seterusnya »</button>
+      </div>
+      <div class="pagination-dots" id="fateh-dots">
+        <span class="page-dot active" onclick="goToPage('fateh', 1)"></span>
+        <span class="page-dot" onclick="goToPage('fateh', 2)"></span>
+      </div>
+    </div>
+    <a href="#" class="back-to-menu" onclick="scrollToTop()">⬆️ Kembali ke Menu</a>
   </section>
 
   <section id="salahuddin" class="section">
-    <h2>Salahuddin Al-Ayyubi</h2>
-    <img src="6.jpg" alt="Komik Salahuddin 1">
-    <img src="7.jpg" alt="Komik Salahuddin 2">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
+    <div class="section-header">
+      <h2>Salahuddin Al-Ayyubi</h2>
+      <p>Pahlawan Islam terkenal dalam Perang Salib</p>
+    </div>
+    <div class="comic-container">
+      <div class="comic-pages">
+        <div class="comic-page active" data-page="1">
+          <img src="6.jpg" alt="Komik Salahuddin 1">
+        </div>
+        <div class="comic-page" data-page="2">
+          <img src="7.jpg" alt="Komik Salahuddin 2">
+        </div>
+      </div>
+      <div class="comic-nav">
+        <button class="nav-btn prev-btn" onclick="changePage('salahuddin', -1)" disabled>« Sebelumnya</button>
+        <div class="pagination" id="salahuddin-pagination">
+          <span class="page-indicator">Halaman <span class="current-page">1</span> dari <span class="total-pages">2</span></span>
+        </div>
+        <button class="nav-btn next-btn" onclick="changePage('salahuddin', 1)">Seterusnya »</button>
+      </div>
+      <div class="pagination-dots" id="salahuddin-dots">
+        <span class="page-dot active" onclick="goToPage('salahuddin', 1)"></span>
+        <span class="page-dot" onclick="goToPage('salahuddin', 2)"></span>
+      </div>
+    </div>
+    <a href="#" class="back-to-menu" onclick="scrollToTop()">⬆️ Kembali ke Menu</a>
   </section>
 
+  <footer id="footer">
+    <p>© 2025 SejaKOM Digital</p>
+    <p>Pilihan komik sejarah tokoh-tokoh Islam terbesar</p>
+  </footer>
+
   <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+  <audio id="pageSound" src="https://www.soundjay.com/page-flip/sounds/page-flip-01a.mp3"></audio>
 
   <script>
+    // Track current pages for each section
+    const currentPages = {
+      abubakar: 1,
+      umaraziz: 1,
+      fateh: 1,
+      salahuddin: 1
+    };
+    
+    // Track total pages for each section
+    const totalPages = {
+      abubakar: 3,
+      umaraziz: 2,
+      fateh: 2,
+      salahuddin: 2
+    };
+    
+    // Start the app
     function startReading() {
       document.getElementById('start-screen').style.display = 'none';
       document.getElementById('main-menu').style.display = 'flex';
+      document.getElementById('footer').style.display = 'block';
+      
       const sections = document.querySelectorAll('.section');
-      sections.forEach(section => { section.style.display = 'block'; });
+      sections.forEach(section => { 
+        section.style.display = 'block'; 
+      });
+      
+      // Set Nota as active by default
+      navigateSection(document.querySelector('[data-section="nota"]'));
+      
+      // Play sound
+      playSound('clickSound');
     }
-
-    function playClickSound() {
-      document.getElementById('clickSound').play();
+    
+    // Navigate between sections
+    function navigateSection(element) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.style.display = 'none';
+      });
+      
+      // Remove active class from all nav links
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+      });
+      
+      // Show selected section
+      const sectionId = element.getAttribute('data-section');
+      document.getElementById(sectionId).style.display = 'block';
+      
+      // Add active class to clicked link
+      element.classList.add('active');
+      
+      // Play sound
+      playSound('clickSound');
+      
+      // Scroll to section
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
     }
-
-    const backToMenuLinks = document.querySelectorAll('.back-to-menu');
-    backToMenuLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        playClickSound();
+    
+    // Change comic page
+    function changePage(section, direction) {
+      // Get current page and calculate new page
+      let currentPage = currentPages[section];
+      let newPage = currentPage + direction;
+      
+      // Check if new page is valid
+      if (newPage < 1 || newPage > totalPages[section]) {
+        return;
+      }
+      
+      // Hide current page
+      const currentPageElement = document.querySelector(`#${section} .comic-page[data-page="${currentPage}"]`);
+      currentPageElement.classList.remove('active');
+      
+      // Show new page
+      const newPageElement = document.querySelector(`#${section} .comic-page[data-page="${newPage}"]`);
+      newPageElement.classList.add('active');
+      
+      // Update current page
+      currentPages[section] = newPage;
+      
+      // Update pagination
+      document.querySelector(`#${section} .current-page`).textContent = newPage;
+      
+      // Update buttons
+      updateButtons(section);
+      
+      // Update dots
+      updateDots(section);
+      
+      // Play page turn sound
+      playSound('pageSound');
+    }
+    
+    // Go to specific page
+    function goToPage(section, page) {
+      // Hide current page
+      const currentPage = currentPages[section];
+      const currentPageElement = document.querySelector(`#${section} .comic-page[data-page="${currentPage}"]`);
+      currentPageElement.classList.remove('active');
+      
+      // Show new page
+      const newPageElement = document.querySelector(`#${section} .comic-page[data-page="${page}"]`);
+      newPageElement.classList.add('active');
+      
+      // Update current page
+      currentPages[section] = page;
+      
+      // Update pagination
+      document.querySelector(`#${section} .current-page`).textContent = page;
+      
+      // Update buttons
+      updateButtons(section);
+      
+      // Update dots
+      updateDots(section);
+      
+      // Play page turn sound
+      playSound('pageSound');
+    }
+    
+    // Update navigation buttons
+    function updateButtons(section) {
+      const prevBtn = document.querySelector(`#${section} .prev-btn`);
+      const nextBtn = document.querySelector(`#${section} .next-btn`);
+      
+      prevBtn.disabled = currentPages[section] === 1;
+      nextBtn.disabled = currentPages[section] === totalPages[section];
+    }
+    
+    // Update pagination dots
+    function updateDots(section) {
+      const dots = document.querySelectorAll(`#${section}-dots .page-dot`);
+      dots.forEach((dot, index) => {
+        dot.classList.remove('active');
+        if (index + 1 === currentPages[section]) {
+          dot.classList.add('active');
+        }
+      });
+    }
+    
+    // Play sound
+    function playSound(soundId) {
+      const sound = document.getElementById(soundId);
+      sound.currentTime = 0;
+      sound.play().catch(() => {
+        // Ignore errors if autoplay is blocked
+      });
+    }
+    
+    // Scroll to top
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      playSound('clickSound');
+    }
+    
+    // Initialize page indicators on load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set initial page values
+      Object.keys(currentPages).forEach(section => {
+        document.querySelector(`#${section} .current-page`).textContent = '1';
+        document.querySelector(`#${section} .total-pages`).textContent = totalPages[section];
       });
     });
   </script>
