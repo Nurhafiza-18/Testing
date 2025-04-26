@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SejaKOM Digital (Full Komik)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
+
+    :root {
+      --primary-color: #005b96;
+      --primary-light: #0077cc;
+      --primary-dark: #003d66;
+      --secondary-color: #ffc107;
+      --secondary-light: #ffdb58;
+      --secondary-dark: #e6a800;
+      --accent-color: #03396c;
+      --text-light: #ffffff;
+      --text-dark: #333333;
+      --text-muted: #6c757d;
+      --bg-light: #f8f9fa;
+      --bg-card: #ffffff;
+      --bg-dark: #343a40;
+      --shadow: 0 4px 15px rgba(0,0,0,0.15);
+      --shadow-sm: 0 2px 5px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+      --border-radius: 15px;
+      --border-radius-sm: 10px;
+      --border-radius-lg: 20px;
+      --transition: all 0.3s ease;
+      --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html { 
+      scroll-behavior: smooth; 
+      font-size: 16px;
+    }
+    
+    body { 
+      margin: 0; 
+      font-family: 'Nunito', 'Segoe UI', 'Roboto', sans-serif; 
+      background: var(--bg-light); 
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    button {
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    a {
+      text-decoration: none;
+      color: var(--primary-color);
+    }
+    
+    /* Utilities */
+    .text-center {
+      text-align: center;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    /* Start Screen */
+    #start-screen {
+      height: 100vh; 
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      justify-content: center;
+      background: var(--gradient);
+      color: var(--text-light); 
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #start-screen::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('/api/placeholder/900/600');
+      background-position: center;
+      background-size: cover;
+      opacity: 0.1;
+      z-index: 0;
+      animation: slowZoom 30s infinite alternate;
+    }
+    
+    @keyframes slowZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+    
+    #start-screen::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle, transparent 30%, var(--primary-dark) 100%);
+      z-index: 1;
+    }
+    
+    #start-screen > * {
+      position: relative;
+      z-index: 2;
+    }
+    
+    #start-screen h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: fadeInDown 1s ease-out;
+    }
+    
+    #start-screen p {
+      max-width: 600px;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+    
+    #start-screen button {
+      padding: 1rem 2.5rem; 
+      font-size: 1.2rem;
+      background: var(--secondary-color); 
+      border: none; 
+      border-radius: 50px;
+      font-weight: 700; 
+      transition: var(--transition);
+      color: var(--text-dark);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out forwards;
+      animation-delay: 0.6s;
+    }
+    
+    #start-screen button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    #start-screen button:hover::before {
+      left: 100%;
+    }
+    
+    #start-screen button:hover { 
+      background: var(--secondary-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    
+    #start-screen button:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+    
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    /* Header Navigation */
+    header {
+      background: var(--primary-color);
+      color: var(--text-light);
+      padding: 1rem;
+      position: sticky;
+      top: 0; 
+      display: none;
+      justify-content: center; 
+      flex-wrap: wrap;
+      gap: 1rem; 
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: var(--transition);
+    }
+    
+    header.scrolled {
+      padding: 0.5rem 1rem;
+      background: rgba(0, 91, 150, 0.95);
+      backdrop-filter: blur(5px);
+    }
+    
+    header a { 
+      color: var(--text-light); 
+      text-decoration: none; 
+      font-weight: 600; 
+      transition: var(--transition);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    header a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--secondary-color);
+      transition: var(--transition);
+      transform: translateX(-50%);
+    }
+    
+    header a:hover::before {
+      width: 70%;
+    }
+    
+    header a:hover { 
+      background-color: rgba(255,255,255,0.1); 
+      color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    header a.active {
+      background-color: rgba(255,255,255,0.15);
+      color: var(--secondary-color);
+      font-weight: 700;
+    }
+    
+    header a.active::before {
+      width: 70%;
+    }
+    
+    /* Comic Sections */
+    .section {
+      max-width: 900px; 
+      margin: 3rem auto; 
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+      border-radius: var(--border-radius);
+      overflow: hidden; 
+      padding: 2rem 1.5rem; 
+      display: none;
+      animation: fadeIn 1s ease forwards; 
+      opacity: 0;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--gradient);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    .section-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--gradient);
+      border-radius: 3px;
+    }
+    
+    .section-header h2 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-header p {
+      color: var(--text-muted);
+      max-width: 80%;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    
+    .comic-container {
+      position: relative;
+      border-radius: var(--border-radius-sm);
+      overflow: hidden;
+      background-color: #f7f7f7;
+      box-shadow: var(--shadow-sm);
+      padding: 1rem;
+    }
+    
+    .comic-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .nav-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .nav-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    
+    .nav-btn:active {
+      transform: translateY(0);
+    }
+    
+    .nav-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      flex-grow: 1;
+    }
+    
+    .page-indicator {
+      font-weight: 600;
+      color: var(--primary-color);
+      background-color: rgba(0, 91, 150, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+    }
+    
+    .pagination-dots {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+      gap: 0.5rem;
+    }
+    
+    .page-dot {
+      width: 12px;
+      height: 12px;
+      background: #ddd;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .page-dot:hover {
+      background: var(--primary-light);
+      transform: scale(1.2);
+    }
+    
+    .page-dot.active {
+      background: var(--primary-color);
+      transform: scale(1.3);
+      box-shadow: 0 0 0 2px rgba(0, 91, 150, 0.3);
+    }
+    
+    .comic-pages {
+      position: relative;
+      min-height: 200px;
+      background: white;
+      border-radius: var(--border-radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .comic-page {
+      display: none;
+      position: relative;
+    }
+    
+    .comic-page.active {
+      display: block;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    .section img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: var(--border-radius-sm);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    
+    .section img:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow);
+    }
+    
+    .back-to-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem auto 0;
+      padding: 0.8rem 1.5rem;
+      background: var(--primary-color);
+      color: white;
+      width: fit-content;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .back-to-menu:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    
+    .back-to-menu:active {
+      transform: translateY(-1px);
+    }
+    
+    /* Lightbox for images */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+    
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .lightbox-content {
+      width: 90%;
+      height: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    
+    /* Floating action button */
+    .floating-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 900;
+      display: none;
+    }
+    
+    .floating-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: var(--primary-dark);
+      color: var(--text-light);
+      margin-top: 3rem;
+      display: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--gradient);
+    }
+    
+    footer .container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    footer h3 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+    }
+    
+    footer p {
+      margin: 0.5rem 0;
+      opacity: 0.8;
+    }
+    
+    footer .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    footer .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      transition: var(--transition);
+    }
+    
+    footer .social-icon:hover {
+      background: var(--secondary-color);
+      color: var(--text-dark);
+      transform: translateY(-3px);
+    }
+    
+    footer .copyright {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    /* Loading animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: var(--transition);
+    }
+    
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(0, 91, 150, 0.2);
+      border-top-color: var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+    }
+    
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Progress bar */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: transparent;
+      z-index: 1001;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: var(--secondary-color);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    /* Reading mode */
+    .reading-mode {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: none;
+      z-index: 990;
+    }
+    
+    .reading-mode:hover {
+      background: var(--primary-dark);
+    }
+    
+    body.reading-mode-active {
+      background: #222;
+    }
+    
+    body.reading-mode-active .section {
+      background: #333;
+      color: white;
+    }
+    
+    body.reading-mode-active .section-header h2 {
+      color: var(--secondary-color);
+    }
+    
+    body.reading-mode-active .section-header p {
+      color: #ddd;
+    }
+    
+    body.reading-mode-active .comic-container {
+      background: #222;
+    }
+    
+    body.reading-mode-active img {
+      filter: brightness(0.9);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      html {
+        font-size: 14px;
+      }
+      
+      #start-screen h1 {
+        font-size: 2.2rem;
+      }
+      
+      #start-screen p {
+        font-size: 1.1rem;
+      }
+      
+      #start-screen button {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+      }
+      
+      header {
+        padding: 0.5rem;
+      }
+      
+      header a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+      }
+      
+      .section {
+        padding: 1.5rem 1rem;
+        margin: 1.5rem 1rem;
+      }
+      
+      .section-header h2 {
+        font-size: 1.6rem;
+      }
+      
+      .section-header p {
+        font-size: 1rem;
+        max-width: 95%;
+      }
+      
+      .comic-nav {
+        justify-content: center;
+      }
+      
+      .floating-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        bottom: 1.5rem;
+        right: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      html {
+        font-size: 13px;
+      }
+      
+      #start-screen h1 {
+        font-size: 1.8rem;
+      }
+      
+      #start-screen p {
+        font-size: 1rem;
+      }
+      
+      header {
+        padding: 0.4rem;
+      }
+      
+      header a {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+      }
+      
+      .section {
+        padding: 1rem;
+        margin: 1rem;
+      }
+      
+      .section-header h2 {
+        font-size: 1.4rem;
+      }
+      
+      .comic-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .nav-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .pagination {
+        order: -1;
+        margin-bottom: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Animation -->
+  <div class="loading" id="loading">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Start Screen -->
+  <div id="start-screen">
+    <h1>Selamat Datang ke SejaKOM Digital</h1>
+    <p>Jelajahi sejarah tokoh-tokoh Islam terkenal melalui siri komik interaktif yang menarik! Nikmati cerita-cerita menarik yang dikemas dalam bentuk visual yang menakjubkan.</p>
+    <button onclick="startReading()">Mula Membaca</button>
+  </div>
+
+  <!-- Header Navigation -->
+  <header id="main-menu">
+    <a href="#nota" class="nav-link" data-section="nota" onclick="navigateSection(this)">Nota Poket</a>
+    <a href="#abubakar" class="nav-link" data-section="abubakar" onclick="navigateSection(this)">Abu Bakar</a>
+    <a href="#umaraziz" class="nav-link" data-section="umaraziz" onclick="navigateSection(this)">Umar Abdul Aziz</a>
+    <a href="#fateh" class="nav-link" data-section="fateh" onclick="navigateSection(this)">Muhammad Al-Fateh</a>
+    <a href="#salahuddin" class="nav-link" data-section="salahuddin" onclick="navigateSection(this)">Salahuddin Al-Ayyubi</a>
+  </header>
+
+  <!-- Reading Mode Button -->
+  <button id="readingModeButton" class="reading-mode">Mode Membaca</button>
+
+  <!-- Floating Action Button -->
+  <div class="floating-btn" id="floatingBtn" onclick="scrollToTop()">
+    ⬆️
+  </div>
+
+  <!-- Comic Sections -->
+  <section id="nota" class="section">
+    <div class="section-header">
+      <h2>Nota Poket SejaKOM</h2>
+      <p>Nota ringkas tentang tokoh-tokoh Islam sepanjang zaman</p>
+    </div>
+    <div class="comic-container">
+      <img src="1.jpg" alt="Nota Poket" onclick="openLightbox(this.src)">
+    </div>
+    <a href="#" class="back-to-menu" onclick="scrollToTop()">
+      <span>⬆️</span> Kembali ke Menu
+    </a>
+  </section>
+
+  <section id="abubakar" class="section">
+    <div class="section-header">
+      <h2>Abu Bakar As-Siddiq</h2>
+      <p>Khalifah pertama dalam sejarah Islam</p>
+    </div>
+    <div class="comic-container">
+      <div class="comic-pages">
+        <div class="comic-page active" data-page="1">
+          <img src="8.jpg" alt="Komik Abu Bakar 1" onclick="openLightbox(this.src)">
+        </div>
+        <div class="comic-page" data-page="2">
+          <img src="9.jpg" alt="Komik Abu Bakar 2" onclick="openLightbox(this.src)">
+        </div>
+        <div class="comic-page" data-page="3">
+          <img src="10.jpg" alt="Komik Abu Bakar 3" onclick="openLightbox(this.src)">
+        </div>
+      </div>
+      <div class="comic-nav">
+        <button class="nav-btn prev-btn" onclick="changePage('abubakar', -1)" disabled>
+          <span>«</span> Sebelumnya
+        </button>
+        <div class="pagination" id="abubakar-pagination">
+          <span class="page-indicator">Halaman <span class="current-page">1</span> dari <span class="total-pages">3</span></span>
+        </div>
+        <button class="nav-btn next-btn" onclick="changePage('abubakar', 1)">
+          Seterusnya <span>»</span>
+        </button>
+      </div>
+      <div class="pagination-dots" id="abubakar-dots">
+        <span class="page-dot active" onclick="goToPage('abubakar', 1)"></span>
+        <span class="page-dot" onclick="goToPage('abubakar', 2)"></span>
+        <span class="page-dot" onclick="goToPage('abubakar', 3)"></span>
+      </div>
+    </div>
+    <a href="#" class="back-to-menu" onclick="scrollToTop()">
+      <span>⬆️</span> Kembali ke Menu
+    </a>
+  </section>
+
+  <section id="umaraziz" class="section">
+    <div class="section-header">
+      <h2>Umar Abdul Aziz</h2>
+      <p>Khalifah yang terkenal dengan keadilan dan kebijaksanaan</p>
+    </div>
+    <div class="comic-container">
+      <div class="comic-pages">
+        <div class="comic-page active" data-page="1">
+          <img src="2.jpg" alt="Komik Umar
