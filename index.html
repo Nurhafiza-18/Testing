@@ -1,129 +1,31 @@
-<!DOCTYPE html>
-<html lang="ms">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SejaKOM Digital PRO (Infografik Edition)</title>
-  <style>
-    html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f9f9f9; }
-    #start-screen {
-      height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      background: #0077cc; color: white; text-align: center;
-    }
-    #start-screen button {
-      margin-top: 2rem; padding: 1rem 2rem; font-size: 1.2rem;
-      background: #ffd700; border: none; border-radius: 30px;
-      cursor: pointer; font-weight: bold; transition: background 0.3s;
-    }
-    #start-screen button:hover { background: #ffbb00; }
-    header {
-      background: #0077cc; color: white; padding: 1rem; position: sticky;
-      top: 0; display: flex; justify-content: center; gap: 1rem; z-index: 1000;
-      display: none;
-    }
-    header a { color: white; text-decoration: none; font-weight: bold; transition: 0.3s; }
-    header a:hover { color: #ffd700; }
-    .section {
-      max-width: 900px; margin: auto; background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-top: 2rem; border-radius: 10px;
-      overflow: hidden; padding: 1rem; display: none;
-      animation: fadeIn 1s ease forwards; opacity: 0;
-    }
-    .section img {
-      width: 80%; max-width: 700px; height: auto;
-      display: block; margin: 1rem auto;
-      border-radius: 10px; object-fit: contain;
-    }
-    .back-to-menu {
-      display: block; margin: 1rem auto 0; padding: 0.5rem 1rem;
-      background: #0077cc; color: white; text-align: center;
-      width: fit-content; border-radius: 30px; text-decoration: none;
-      font-size: 0.9rem;
-    }
-    .back-to-menu:hover { background: #005fa3; }
-    h2 { text-align: center; color: #333; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    #nota { background: #e3f2fd; }
-    #abubakar { background: #e8f5e9; }
-    #umar { background: #f1f8e9; }
-    #fateh { background: #fff3e0; }
-    #salahuddin { background: #e1f5fe; }
-  </style>
-</head>
-<body>
-  <div id="start-screen">
-    <h1>Selamat Datang ke SejaKOM Digital</h1>
-    <button onclick="startReading()">Mula Membaca</button>
-  </div>
-
-  <header id="main-menu">
-    <a href="#nota" onclick="playClickSound()">Nota Poket</a>
-    <a href="#abubakar" onclick="playClickSound()">Abu Bakar</a>
-    <a href="#umar" onclick="playClickSound()">Umar Al-Khattab</a>
-    <a href="#fateh" onclick="playClickSound()">Muhammad Al-Fateh</a>
-    <a href="#salahuddin" onclick="playClickSound()">Salahuddin Al-Ayyubi</a>
-  </header>
-
-  <section id="nota" class="section">
-    <h2>Nota Poket</h2>
-    <img src="1.jpg" alt="Nota Poket">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
-  </section>
-
-  <section id="abubakar" class="section">
-    <h2>Abu Bakar As-Siddiq</h2>
-    <img src="abubakar.jpg" alt="Infografik Abu Bakar">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
-  </section>
-
-  <section id="umar" class="section">
-    <h2>Umar Al-Khattab</h2>
-    <img src="umarkhattab.jpg" alt="Infografik Umar Al-Khattab">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
-  </section>
-
-  <section id="fateh" class="section">
-    <h2>Muhammad Al-Fateh</h2>
-    <img src="fateh.jpg" alt="Infografik Muhammad Al-Fateh">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
-  </section>
-
-  <section id="salahuddin" class="section">
-    <h2>Salahuddin Al-Ayyubi</h2>
-    <img src="salahuddin.jpg" alt="Infografik Salahuddin">
-    <a href="#" class="back-to-menu">⬆️ Kembali ke Menu</a>
-  </section>
-
-  <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
-
-  <script>
-    function startReading() {
-      document.getElementById('start-screen').style.display = 'none';
-      document.getElementById('main-menu').style.display = 'flex';
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(section => { section.style.display = 'block'; });
-    }
-
-    function playClickSound() {
-      document.getElementById('clickSound').play();
-    }
-
-    const backToMenuLinks = document.querySelectorAll('.back-to-menu');
-    backToMenuLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        playClickSound();
-      });
-    });
-  </script>
-</body>
-</html>
+{
+  "notaPoket": {
+    "tajuk": "Nota Poket SejaKOM",
+    "gambar": "1.jpg"
+  },
+  "abubakar": {
+    "tajuk": "Abu Bakar As-Siddiq",
+    "gambar": "abubakar.jpg",
+    "trivia": "Tokoh pertama bergelar Khalifah selepas Rasulullah SAW wafat."
+  },
+  "umar": {
+    "tajuk": "Umar Al-Khattab",
+    "gambar": "umarkhattab.jpg",
+    "trivia": "Mengembangkan empayar Islam terbesar pada zamannya."
+  },
+  "umaraziz": {
+    "tajuk": "Umar Abdul Aziz",
+    "gambar": "umaraziz.jpg",
+    "trivia": "Dikenali sebagai Khalifah kelima yang adil dan zuhud."
+  },
+  "fateh": {
+    "tajuk": "Muhammad Al-Fateh",
+    "gambar": "fateh.jpg",
+    "trivia": "Menakluk Constantinople ketika berusia 21 tahun."
+  },
+  "salahuddin": {
+    "tajuk": "Salahuddin Al-Ayyubi",
+    "gambar": "salahuddin.jpg",
+    "trivia": "Membebaskan Baitulmaqdis daripada tentera Salib."
+  }
+}
