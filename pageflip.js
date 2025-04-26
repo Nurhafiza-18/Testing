@@ -1,4 +1,3 @@
-// pageflip.js
 class FlipBook {
   constructor(containerId, images) {
     this.container = document.getElementById(containerId);
@@ -15,25 +14,18 @@ class FlipBook {
     img.src = this.images[this.currentPage];
     page.appendChild(img);
     this.container.appendChild(page);
-
     this.addControls();
   }
 
   addControls() {
     const prevBtn = document.createElement('button');
     prevBtn.textContent = '← Sebelumnya';
-    prevBtn.style.position = 'absolute';
-    prevBtn.style.left = '10px';
-    prevBtn.style.top = '50%';
-    prevBtn.style.transform = 'translateY(-50%)';
+    prevBtn.id = 'prevBtn';
     prevBtn.onclick = () => this.prevPage();
 
     const nextBtn = document.createElement('button');
     nextBtn.textContent = 'Seterusnya →';
-    nextBtn.style.position = 'absolute';
-    nextBtn.style.right = '10px';
-    nextBtn.style.top = '50%';
-    nextBtn.style.transform = 'translateY(-50%)';
+    nextBtn.id = 'nextBtn';
     nextBtn.onclick = () => this.nextPage();
 
     this.container.appendChild(prevBtn);
